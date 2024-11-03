@@ -32,7 +32,7 @@ docker-compose run web python manage.py migrate
 # Create a superuser account
 docker-compose run web python manage.py createsuperuser
 
-
+```
 
 # License
 The MIT License (MIT)
