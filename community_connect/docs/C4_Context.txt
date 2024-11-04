@@ -1,0 +1,165 @@
+workspace {
+
+    configuration {
+        visibility "private"
+    }
+
+    model {
+        // Define users
+        volunteer = person "Volunteer" "A person who volunteers for events."
+        organizer = person "Organizer" "A person who organizes events."
+        admin = person "Admin" "A person who manages content and users on the platform."
+
+        // Define main software system
+        community_connect = softwareSystem "Community Connect" "An online platform connecting volunteers and organizers for community events." {
+            web_app = container "Django Web App" "Python Django" "Handles user interactions, event management, and business logic" {
+                // Define components within the Django Web App container for the Component Diagram
+                home_view = component "HomeView" "Django View" "Displays upcoming events for volunteers"
+                event_detail_view = component "EventDetailView" "Django View" "Shows details of a specific event"
+                dashboard_view = component "DashboardView" "Django View" "Displays user-specific events and actions"
+                event_create_view = component "EventCreateView" "Django View" "Allows organizers to create new events"
+                feedback_view = component "FeedbackView" "Django View" "Allows volunteers to leave feedback on events"
+                
+                user_model = component "User Model" "Django Model" "Represents a platform user"
+                event_model = component "Event Model" "Django Model" "Represents a community event"
+                registration_model = component "Registration Model" "Django Model" "Tracks volunteer registrations"
+                feedback_model = component "Feedback Model" "Django Model" "Holds feedback left by volunteers"
+            }
+
+            db = container "PostgreSQL Database" "PostgreSQL" "Stores user data, events, and feedback"
+            redis = container "Redis" "Cache" "Handles session management and caching"
+        }
+
+        // Define external system outside the main system
+        email_service = softwareSystem "Email Service" "Sends notifications and confirmations."
+
+        // Relationships for the Context and Container Diagram
+        volunteer -> web_app "Browses and registers for events"
+        organizer -> web_app "Creates and manages events"
+        admin -> web_app "Manages users and events"
+
+        web_app -> db "Reads from and writes to"
+        web_app -> email_service "Sends emails via"
+        web_app -> redis "Uses for caching and session management"
+
+        // Define interactions between components for the Component Diagram
+        home_view -> event_model "Retrieves list of events from"
+        event_detail_view -> event_model "Retrieves event details from"
+        dashboard_view -> registration_model "Displays registered events for users"
+        event_create_view -> event_model "Creates new events in"
+        feedback_view -> feedback_model "Stores feedback in"
+        feedback_view -> email_service "Sends notification email via"
+    }
+
+    views {
+        // Context Diagram
+        systemContext community_connect {
+            include *
+            autolayout lr
+        }
+
+        // Container Diagram
+        container community_connect {
+            include *
+            autolayout lr
+        }
+
+        // Component Diagram for Django Web App
+        component web_app {
+            include *
+            autolayout lr
+        }
+
+        styles {
+            element "Volunteer" {
+                background #ffcc00
+                color #000000
+                shape person
+            }
+
+            element "Organizer" {
+                background #ffcc00
+                color #000000
+                shape person
+            }
+
+            element "Admin" {
+                background #ffcc00
+                color #000000
+                shape person
+            }
+
+            element "Community Connect" {
+                background #1168bd
+                color #ffffff
+            }
+
+            element "Email Service" {
+                background #6ea6b6
+                color #ffffff
+            }
+            
+            element "Django Web App" {
+                background #a0d8ef
+                color #000000
+            }
+
+            element "PostgreSQL Database" {
+                background #c3e6cb
+                color #000000
+            }
+
+            element "Redis" {
+                background #f8d7da
+                color #000000
+            }
+
+            element "HomeView" {
+                background #ffdd99
+                color #000000
+            }
+
+            element "EventDetailView" {
+                background #ffdd99
+                color #000000
+            }
+
+            element "DashboardView" {
+                background #ffdd99
+                color #000000
+            }
+
+            element "EventCreateView" {
+                background #ffdd99
+                color #000000
+            }
+
+            element "FeedbackView" {
+                background #ffdd99
+                color #000000
+            }
+
+            element "User Model" {
+                background #ccffcc
+                color #000000
+            }
+
+            element "Event Model" {
+                background #ccffcc
+                color #000000
+            }
+
+            element "Registration Model" {
+                background #ccffcc
+                color #000000
+            }
+
+            element "Feedback Model" {
+                background #ccffcc
+                color #000000
+            }
+        }
+        
+        theme default
+    }
+}
