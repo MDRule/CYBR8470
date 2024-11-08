@@ -85,6 +85,17 @@ As a **bot or malicious user**, I want to **create multiple fake events** so I c
 - Monitor and flag repeated content submissions and add the capability to temporarily ban or warn users exhibiting spammy behavior.
 
 ---
+## Mockups
+### System Context
+![Story 1: Volunteer Browsing Events](U1.jpg "Story 1: Volunteer Browsing Events")
+### System Context
+![Story 2: Volunteer Registration for Events](U2.jpg "Story 2: Volunteer Registration for Events")
+### System Context
+![Story 3: Organizer Event Creation](U3.jpg "Story 3: Organizer Event Creation")
+### System Context
+![Story 4: Admin User Management](U4.jpg "Story 4: Admin User Management")
+### System Context
+![Story 5: Volunteer Event Feedback](U5.jpg "Story 5: Volunteer Event Feedback")
 
 ## C4 Diagram
 ### System Context
