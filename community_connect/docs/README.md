@@ -86,7 +86,7 @@ As a **bot or malicious user**, I want to **create multiple fake events** so I c
 
 ---
 
-## User Stories
+## C4 Diagram
 ### System Context
 ![System Context](SystemContext-001.png "System Context")
 ### System Container
