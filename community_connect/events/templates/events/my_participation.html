@@ -1,0 +1,7 @@
+<!-- events/templates/events/my_participation.html -->
+<h1>My Participation</h1>
+<ul>
+    {% for participation in participations %}
+    <li>{{ participation.event.name }} - {{ participation.timestamp }}</li>
+    {% endfor %}
+</ul>

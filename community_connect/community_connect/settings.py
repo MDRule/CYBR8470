@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-kw4zj6%$7!+mp8bn@38pwvz99$k$)mb+#_nm=ns5a!6_5b0b@h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+#ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -81,7 +82,7 @@ DATABASES = {
         'USER': 'user',
         'PASSWORD': 'password',
         'HOST': 'db',  # service name in docker-compose.yml
-        'PORT': 5432,
+        'PORT': '5432',
     }
 }
 

@@ -21,3 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('events.urls')),  # Include the events app URLs
 ]
+
+

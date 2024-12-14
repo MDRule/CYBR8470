@@ -1,0 +1,7 @@
+<!-- events/templates/events/view_signups.html -->
+<h1>Event Signups</h1>
+<ul>
+    {% for participation in participations %}
+    <li>{{ participation.user.username }}</li>
+    {% endfor %}
+</ul>
