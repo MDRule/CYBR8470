@@ -4,9 +4,11 @@
 
 {% block content %}
 <h1>Event Feedback</h1>
-<form method="POST">
+<form method="POST" style="display: flex; flex-direction: column; gap: 15px; width: 300px;">
     {% csrf_token %}
+    
     {{ form.as_p }}
+
     <button type="submit">Submit</button>
 </form>
 {% endblock %}

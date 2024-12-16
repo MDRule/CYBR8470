@@ -10,8 +10,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
 
-
-
 def home(request):
     return HttpResponse("Welcome to Community Connect!")
 
@@ -109,27 +107,35 @@ def browse_events(request):
 
 
 def volunteer_signup(request):
+    # Check if the user is already logged in
     if request.user.is_authenticated:
         messages.info(request, "You are already signed in. Sign out to create a new account.")
         return redirect('create_event')  # Redirect to event creation or another page
 
+    # Handle the form submission
     if request.method == 'POST':
         form = VolunteerSignupForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Signup successful! Please sign in.")
             return redirect('login')  # Redirect to the login page after signup
+        else:
+            messages.error(request, "There were errors in your signup. Please correct them below.")
     else:
         form = VolunteerSignupForm()
 
+    # Render the signup page with the form
     return render(request, 'events/volunteer_signup.html', {'form': form})
+
 
 def feedback(request):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('browse_events')
+            messages.success(request, "Thank you for your feedback!")
+            return redirect('browse_events')  # Redirect to the homepage or events page
     else:
         form = FeedbackForm()
+
     return render(request, 'events/feedback.html', {'form': form})

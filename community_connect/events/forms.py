@@ -1,10 +1,15 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile, Event, Feedback
+from captcha.fields import CaptchaField
+
 
 class VolunteerSignupForm(forms.ModelForm):
-    email = forms.EmailField()
-    phone_number = forms.CharField(max_length=15, required=True)
+    email = forms.EmailField(required=True, label="Email Address")
+    phone_number = forms.CharField(
+        max_length=15, required=True, label="Phone Number"
+    )
+    captcha = CaptchaField()  # Add captcha to the form
 
     class Meta:
         model = User
@@ -24,11 +29,14 @@ class VolunteerSignupForm(forms.ModelForm):
 
 # Add this missing EventForm class
 class EventForm(forms.ModelForm):
+    captcha = CaptchaField()  # Add CAPTCHA field
+
     class Meta:
         model = Event
         fields = ['name', 'description', 'date']
 
 class FeedbackForm(forms.ModelForm):
+    captcha = CaptchaField()
     class Meta:
         model = Feedback
         fields = ['event', 'feedback']  # Match the fields in the Feedback model
