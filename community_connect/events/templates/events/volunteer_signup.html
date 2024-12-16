@@ -5,9 +5,16 @@
 {% block content %}
 <h1>Volunteer Signup</h1>
 <form method="POST">
-
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Sign Up</button>
 </form>
+
+{% if messages %}
+    <ul style="color: red;">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 {% endblock %}

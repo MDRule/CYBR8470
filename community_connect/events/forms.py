@@ -5,6 +5,8 @@ from captcha.fields import CaptchaField
 from django.core.exceptions import ValidationError
 from datetime import date
 from .models import Event
+import re
+
 
 class VolunteerSignupForm(forms.ModelForm):
     email = forms.EmailField(required=True, label="Email Address")
@@ -16,6 +18,14 @@ class VolunteerSignupForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        # Regular expression to validate email
+        pattern = r'^[^@]+@[^@]+\.[^@]+$'
+        if not re.match(pattern, email):
+            raise ValidationError("Invalid email format. Please provide a valid email address.")
+        return email
 
     def save(self, commit=True):
         user = super().save(commit=False)
