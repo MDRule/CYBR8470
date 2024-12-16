@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -12,9 +9,10 @@ class Profile(models.Model):
         max_length=10,
         choices=[('Volunteer', 'Volunteer'), ('Organizer', 'Organizer'), ('Admin', 'Admin')],
     )
+    phone_number = models.CharField(max_length=15, blank=True, null=True)  # Ensure this field exists
 
     def __str__(self):
-        return self.user.username
+        return f"{self.user.username} ({self.role})"
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
@@ -39,3 +37,4 @@ class Participation(models.Model):
 
     def __str__(self):
         return f"{self.user} signed up for {self.event}"
+    
