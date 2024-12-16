@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import VolunteerSignupForm, EventForm, FeedbackForm
-
+from datetime import date 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
@@ -80,14 +80,18 @@ def create_event(request):
         # Check if the logged-in user is a volunteer
         profile = Profile.objects.get(user=request.user)
         if profile.role != 'Volunteer':
-            return render(request, 'events/access_denied.html', {
-                'message': 'Only volunteers can create events. Please sign up as a volunteer first.'
-            })
+            return render(
+                request,
+                'events/access_denied.html',
+                {'message': 'Only volunteers can create events. Please sign up as a volunteer first.'}
+            )
     except Profile.DoesNotExist:
         # If the user has no profile, deny access
-        return render(request, 'events/access_denied.html', {
-            'message': 'Profile not found. Please sign up as a volunteer first.'
-        })
+        return render(
+            request,
+            'events/access_denied.html',
+            {'message': 'Profile not found. Please sign up as a volunteer first.'}
+        )
 
     if request.method == 'POST':
         form = EventForm(request.POST, request.FILES)
@@ -99,7 +103,12 @@ def create_event(request):
     else:
         form = EventForm()
 
-    return render(request, 'events/create_event.html', {'form': form})
+    # Pass today's date to ensure it's used in the form validation
+    context = {
+        'form': form,
+        'today': date.today().isoformat(),  # Format date as YYYY-MM-DD for HTML
+    }
+    return render(request, 'events/create_event.html', context)
 
 def browse_events(request):
     events = Event.objects.all()

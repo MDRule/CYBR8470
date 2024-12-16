@@ -2,7 +2,9 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile, Event, Feedback
 from captcha.fields import CaptchaField
-
+from django.core.exceptions import ValidationError
+from datetime import date
+from .models import Event
 
 class VolunteerSignupForm(forms.ModelForm):
     email = forms.EmailField(required=True, label="Email Address")
@@ -34,6 +36,12 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['name', 'description', 'date']
+
+    def clean_date(self):
+        selected_date = self.cleaned_data['date']
+        if selected_date <= date.today():
+            raise ValidationError("The event date must be in the future.")
+        return selected_date
 
 class FeedbackForm(forms.ModelForm):
     captcha = CaptchaField()
