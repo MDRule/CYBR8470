@@ -11,11 +11,23 @@
     <nav>
         <ul>
             <li><a href="{% url 'browse_events' %}">Home</a></li>
-            <li><a href="{% url 'volunteer_signup' %}">Volunteer Signup</a></li>
-            <li><a href="{% url 'create_event' %}">Register Event</a></li>
+            <li><a href="{% url 'volunteer_signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Sign In</a></li>  <!-- Add Sign In -->
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'create_event' %}">Register Event</a></li>
+                <li><a href="{% url 'logout' %}">Sign Out</a></li> <!-- Sign Out -->
+            {% endif %}
             <li><a href="{% url 'feedback' %}">Feedback</a></li>
         </ul>
     </nav>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}    
+    
     <div>
         {% block content %}
         {% endblock %}

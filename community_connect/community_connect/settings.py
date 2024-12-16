@@ -123,6 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+LOGIN_REDIRECT_URL = 'create_event'  # Redirect to event creation page after login
+LOGOUT_REDIRECT_URL = 'browse_events'  # Redirect to home after logout
 
 
 # Add this if you have a directory for static files

@@ -5,9 +5,8 @@ from .models import Event, Participation, Profile, Feedback  # Ensure Profile is
 # Register Event model
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'date', 'created_at')
+    list_display = ('name', 'description', 'date', 'created_at')  # Ensure these fields exist
     search_fields = ('name', 'description')
-
 # Register Participation model
 @admin.register(Participation)
 class ParticipationAdmin(admin.ModelAdmin):

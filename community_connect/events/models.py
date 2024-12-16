@@ -21,14 +21,22 @@ def create_profile(sender, instance, created, **kwargs):
 
 
     
+
 class Event(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=255)
     description = models.TextField()
     date = models.DateField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    organizer = models.ForeignKey(
+                                User,
+                                on_delete=models.CASCADE,
+                                related_name="organized_events",
+                                default=1  # Replace with the `id` of a default user
+                                )
+    created_at = models.DateTimeField(auto_now_add=True)  # Add this field
 
     def __str__(self):
         return self.name
+
 
 class Participation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
