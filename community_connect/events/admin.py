@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, Participation, Profile  # Ensure Profile is imported
+from .models import Event, Participation, Profile, Feedback  # Ensure Profile is imported
 
 
 # Register Event model
@@ -21,3 +21,12 @@ class ProfileAdmin(admin.ModelAdmin):
     def get_phone_number(self, obj):
         return obj.phone_number
     get_phone_number.short_description = 'Phone Number'  # Customize column header
+
+
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('get_event_name', 'feedback')  # Use a method to display event name
+
+    def get_event_name(self, obj):
+        return obj.event.name  # Access the related event's name
+    get_event_name.short_description = 'Event Name'  # Label for the column

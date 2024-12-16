@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Event
+from .models import Profile, Event, Feedback
 
 class VolunteerSignupForm(forms.ModelForm):
     email = forms.EmailField()
@@ -27,3 +27,8 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['name', 'description', 'date']
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['event', 'feedback']  # Match the fields in the Feedback model

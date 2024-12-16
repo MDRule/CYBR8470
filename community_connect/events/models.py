@@ -38,3 +38,9 @@ class Participation(models.Model):
     def __str__(self):
         return f"{self.user} signed up for {self.event}"
     
+class Feedback(models.Model):
+    event = models.ForeignKey('Event', on_delete=models.CASCADE)  # Relation to Event
+    feedback = models.TextField()
+
+    def __str__(self):
+        return f"{self.event.name} - Feedback"

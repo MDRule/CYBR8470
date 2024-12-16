@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home - Community Connect
+{% endblock %}
+
+{% block content %}
+<h1>Upcoming Events</h1>
+<ul>
+    {% for event in events %}
+        <li>{{ event.name }} - {{ event.date }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

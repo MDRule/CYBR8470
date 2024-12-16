@@ -14,4 +14,8 @@ urlpatterns = [
     path('events/create/', views.CreateEventView.as_view(), name='create_event'),
     path('admin/events/', views.manage_events, name='manage_events'),
     path('signup/volunteer/', views.volunteer_signup, name='volunteer_signup'),
+    path('', views.browse_events, name='browse_events'),
+    path('volunteer_signup/', views.volunteer_signup, name='volunteer_signup'),
+    path('create_event/', views.create_event, name='create_event'),
+    path('feedback/', views.feedback, name='feedback'),
 ]
