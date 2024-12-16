@@ -1,12 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}Register Event{% endblock %}
+{% block title %}Register an Event{% endblock %}
 
 {% block content %}
 <h1>Register an Event</h1>
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" style="display: flex; flex-direction: column; gap: 15px; width: 300px;">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    <div>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required>
+    </div>
+
+    <div>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" required></textarea>
+    </div>
+
+    <div>
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" required>
+    </div>
+
     <button type="submit">Submit</button>
 </form>
 {% endblock %}

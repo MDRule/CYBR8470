@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}
-Home - Community Connect
-{% endblock %}
-
 {% block content %}
-<h1>Upcoming Events</h1>
-<ul>
-    {% for event in events %}
-        <li>{{ event.name }} - {{ event.date }}</li>
-    {% endfor %}
-</ul>
+<h1 style="text-align: center; font-family: Arial, sans-serif; color: #4CAF50;">Upcoming Events</h1>
+
+<table style="width: 80%; margin: 20px auto; border-collapse: collapse; font-family: Arial, sans-serif;">
+    <thead>
+        <tr style="background-color: #4CAF50; color: white; text-align: left;">
+            <th style="padding: 12px; border: 1px solid #ddd;">Event Name</th>
+            <th style="padding: 12px; border: 1px solid #ddd;">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events %}
+        <tr style="background-color: {% cycle '#f9f9f9' '#ffffff' %};">
+            <td style="padding: 12px; border: 1px solid #ddd;">{{ event.name }}</td>
+            <td style="padding: 12px; border: 1px solid #ddd;">{{ event.date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

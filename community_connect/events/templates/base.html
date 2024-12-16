@@ -1,34 +1,42 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Community Connect{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="{% url 'browse_events' %}">Home</a></li>
-            <li><a href="{% url 'volunteer_signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'login' %}">Sign In</a></li>  <!-- Add Sign In -->
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'create_event' %}">Register Event</a></li>
-                <li><a href="{% url 'logout' %}">Sign Out</a></li> <!-- Sign Out -->
-            {% endif %}
-            <li><a href="{% url 'feedback' %}">Feedback</a></li>
-        </ul>
-    </nav>
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
+<!-- Navigation Bar -->
+<nav style="background-color: #4CAF50; padding: 10px 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;">
+        <li style="margin: 0 15px;">
+            <a href="{% url 'browse_events' %}" style="text-decoration: none; color: white; font-weight: bold;">Home</a>
+        </li>
+        {% if not user.is_authenticated %}
+            <li style="margin: 0 15px;">
+                <a href="{% url 'volunteer_signup' %}" style="text-decoration: none; color: white; font-weight: bold;">Volunteer Sign Up</a>
+            </li>
+            <li style="margin: 0 15px;">
+                <a href="{% url 'login' %}" style="text-decoration: none; color: white; font-weight: bold;">Sign In</a>
+            </li>
+        {% else %}
+            <li style="margin: 0 15px;">
+                <a href="{% url 'create_event' %}" style="text-decoration: none; color: white; font-weight: bold;">Register Event</a>
+            </li>
+            <li style="margin: 0 15px;">
+                <a href="{% url 'logout' %}" style="text-decoration: none; color: white; font-weight: bold;">Sign Out</a>
+            </li>
+        {% endif %}
+        <li style="margin: 0 15px;">
+            <a href="{% url 'feedback' %}" style="text-decoration: none; color: white; font-weight: bold;">Feedback</a>
+        </li>
     </ul>
-    {% endif %}    
-    
-    <div>
+</nav>
+
+
+    <!-- Page Content -->
+    <div style="margin: 20px;">
         {% block content %}
         {% endblock %}
     </div>

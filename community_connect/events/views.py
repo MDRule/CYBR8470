@@ -66,8 +66,10 @@ def approve_event(request, event_id):
 #    events = Event.objects.all().order_by('date')  # Show events in chronological order
 #    return render(request, 'events/browse_events.html', {'events': events})
 def browse_events(request):
-    events = Event.objects.all()
+    events = Event.objects.all().order_by('date')
     return render(request, 'events/browse_events.html', {'events': events})
+
+
 def manage_events(request):
     events = Event.objects.filter(status='Pending')
     return render(request, 'events/manage_events.html', {'events': events})
